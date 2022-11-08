@@ -1,3 +1,8 @@
+# Author: Samuel Williams
+# Date: 11/7/22
+# Version 1.0
+# Project: Software Engineering: Assignment 7 part 2.
+
 import unittest
 from SoftwareEngineeringProject import *
 
