@@ -45,9 +45,9 @@ class TestRetirementCalculator(unittest.TestCase):
             self.rc.retirementPlanList = self.rc.readPlans()
             date1 = datetime.date.today()
             date2 = datetime.date(date1.year + random.randint(1, 100), date1.month, date1.day)
-            self.rc.planListSelection = random.choice(self.rc.planListSelection)
-            self.rc.employee.plan = self.rc.retirementPlanList[self.rc.planListSelection]
-            self.rc.employee.CalculateOverInterval(date1, date2)
+            plan_list_selection = self.rc.retirementPlanList.index(random.choice(self.rc.retirementPlanList))
+            self.rc.employee.plan = self.rc.retirementPlanList[plan_list_selection]
+            self.rc.employee.calculateOverInterval(date1, date2)
             self.rc.employee.toString()
         except:
             self.fail()
