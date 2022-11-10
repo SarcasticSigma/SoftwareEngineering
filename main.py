@@ -1,6 +1,6 @@
 # Authors: Bryan Hoang, Jarrod Rodgers, and Samuel Williams
 # Date: 11/7/22
-# Version 1.1
+# Version 1.3
 # Project: Software Engineering: Assignment 7 part 2
 import time
 import unittest
