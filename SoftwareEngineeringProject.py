@@ -66,8 +66,32 @@ class RetirementCalculator:
                 for i in file.readlines():
                     plans.append(i.split(':'))
         return plans
-
-
+    
+    def startMenu():
+        startMenuOptions = [1, 2, 3, 4]
+        # This is the main menu for the application. User will make selections from this menu to
+        # run the program.
+        print("Welcome to the Retirement Calculator!\nMake a selection from the following list to get started.\nTo make a selection, enter the number that corresponds to your intended selection and press enter.")
+        print("1. View Retirement Plans\n2. Make a Selection\n3. View employee data\n 4. Exit")
+        # This gets the menu selection input from the user
+        startSelection = input("Please enter the number of your selection: ")
+        # The following code checks the input for the start menu and calls functions for various menu selections
+        if startSelection in startMenuOptions:
+            if startSelection == 1:
+                RetirementCalculator.readPlans()
+            elif startSelection == 2:
+                RetirementCalculator.getEmployeeName()
+                RetirementCalculator.getPlanListSelection()
+            elif startSelection == 3:
+                RetirementCalculator.getEmployeeData()
+            elif startSelection == 4:
+                quit()
+            else:
+                print("Your selection was invalid. Make sure you enter a valid number.")
+                RetirementCalculator.startMenu()
+        else:
+            print("Your selection was invalid. Make sure you enter a valid number.")
+            RetirementCalculator.startMenu()
 class Employee:
     def __init__(self, param):
         self.plan = None
