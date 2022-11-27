@@ -92,6 +92,23 @@ class RetirementCalculator:
         else:
             print("Your selection was invalid. Make sure you enter a valid number.")
             RetirementCalculator.startMenu()
+        return startSelection
+    
+    def getEmployeeName():
+        # This code gets input for employee name from the user
+        employeeName = input("Please enter the employee name: ")
+        # This checks that a name was actually given and that it is not too long. 
+        # If these tests pass, input is converted to string.
+        if employeeName == "":
+            print("An employee name was not given.")
+            RetirementCalculator.getEmployeeName()
+        elif len(employeeName) <= 30:
+            print("The provided employee name was too long. Please shorten your input.")
+            RetirementCalculator.getEmployeeName()
+        else:
+            str(employeeName)
+        return employeeName
+    
 class Employee:
     def __init__(self, param):
         self.plan = None
