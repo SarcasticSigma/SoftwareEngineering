@@ -1,7 +1,6 @@
 # Main Controlling Class for the system.
 import os
 import unittest
-
 import datetime
 import random
 
@@ -166,12 +165,12 @@ class Employee:
         return f'{self.data}'
 
 
+
 class Controller:
     def __init__(self):
         # Current Employee
 
         self.emp = None
-
         while True:
             selection = input("enter a value 1-3. \n\n1. Create Employee, \n2. Read Employee Data, \n3. Quit\n\n")
 
@@ -180,6 +179,14 @@ class Controller:
                     print("You need to create an employee first!")
                     continue
                 else:
+                    print("Please enter the amount of time worked in minutes.")
+                    timeInput = input("Amount of time worked in minutes:")
+                    print("Your amount of time worked is " + timeInput + " minutes.")
+                    print("Please enter the percentage of hourly pay.")
+                    percentInput = input("percentage of hourly pay:")
+                    num = percentInput
+                    percentage = "{:.0%}".format(float(num))
+                    print("your hourly pay is " + percentage)
                     print(self.emp.toString())
                     continue
 
