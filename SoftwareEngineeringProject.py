@@ -74,7 +74,7 @@ class RetirementCalculator:
         print("Welcome to the Retirement Calculator!\nMake a selection from the following list to get started.\nTo make a selection, enter the number that corresponds to your intended selection and press enter.")
         print("1. View Retirement Plans\n2. Make a Selection\n3. View employee data\n 4. Exit")
         # This gets the menu selection input from the user
-        startSelection = input("Please enter the number of your selection: ")
+        startSelection = input(int("Please enter the number of your selection: "))
         # The following code checks the input for the start menu and calls functions for various menu selections
         if startSelection in startMenuOptions:
             if startSelection == 1:
@@ -117,6 +117,23 @@ class RetirementCalculator:
             RetirementCalculator.getHourlyRate()
         return hourlyRate
     
+    def getPlanListSelection(self):
+        # This function gets the user's selection for retirement plan
+        print("Please choose from the following options: ")
+        print("1. Basic Plan\n2. Plus Plan\n3. Premium Plan\n4. Platinum Plan")
+        planListSelection = input(int("Enter your selection: "))
+        if planListSelection == 1:
+            return self.retirementPlanList[0]
+        elif planListSelection == 2:
+            return self.retirementPlanList[1]
+        elif planListSelection == 3:
+            return self.retirementPlanList[2]
+        elif planListSelection == 4:
+            return self.planListSelection[3]
+        else:
+            print("Your input was invalid. Please enter a valid number for your selection.")
+            RetirementCalculator.getPlanListSelection()
+
 class Employee:
     def __init__(self, param):
         self.plan = None
