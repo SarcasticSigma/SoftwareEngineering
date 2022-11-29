@@ -169,14 +169,14 @@ class TestRetirementCalculator(unittest.TestCase):
     # SUPPORTS REQUIREMENT Functional Requirement 9
     # Tests that the string to be displayed for a data point correctly contains the value to be displayed.
     def test_display(self):
-        self.assertTrue(self.rc.totalContributions.display(1).find(f'{0}', self.rc.paidToEmployee) != -1,
-                        'The display output must contain the amount paid to the employee!')
-        self.assertTrue(self.rc.totalContributions.display(2).find(f'{0}', self.rc.employeeContribution) != -1,
-                        'The display output must contain the amount the employee contributed!')
-        self.assertTrue(self.rc.totalContributions.display(3).find(f'{0}', self.rc.companyContribution) != -1,
-                        'The display output must contain the amount the company contributed!')
-        self.assertTrue(self.rc.totalContributions.display(4).find(f'{0}', self.rc.companyContribution) != -1,
-                        'The display output must contain the amount the total contributions!')
+        self.assertEqual(self.rc.display(1), self.rc.paidToEmployee,
+                         'The display output must contain the amount paid to the employee!')
+        self.assertEqual(self.rc.display(2), self.rc.employeeContribution,
+                         'The display output must contain the amount the employee contributed!')
+        self.assertEqual(self.rc.display(3), self.rc.companyContribution,
+                         'The display output must contain the amount the company contributed!')
+        self.assertEqual(self.rc.display(4), self.rc.totalContributions,
+                         'The display output must contain the amount the total contributions!')
 
 
 if __name__ == '__main__':
