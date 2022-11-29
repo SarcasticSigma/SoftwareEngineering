@@ -1,8 +1,5 @@
 # Main Controlling Class for the system.
 import os
-import unittest
-import datetime
-import random
 
 
 def _makeDefaultPlans(data_path, error):
@@ -31,7 +28,7 @@ class RetirementCalculator:
         self.hourlyRate = 14
         self.startMenuOptions = None
         self.startSelection = None
-        self.retirementPlanList = [1, 2, 3, 4]
+        self.retirementPlanList = [0, 1, 2, 3]
         self.absoluteDataDirectory = os.path.dirname(__file__)
 
         self.startMenuOptions = [1, 2, 3]
@@ -120,21 +117,39 @@ class Controller:
         rc.employeeName = rc.getEmployeeName()
         emp_salary = rc.getHourlyRate()
         plans = rc.readPlans()
+        emp_plan = plans[0]
+        emp_time = 0
         for acc, i in enumerate(plans):
             i.append(i.pop().replace("\n", ""))
-            print(f'{acc} {i}')
-        emp_plan = plans[int(input("Please choose a plan:"))]
-        # Add ability to enter timespan / days / hours
-        emp_time = input("How many hours did the employee work?")
+            print(f'{acc} {i} Name, Employee Contribution %, Company Contribution %')
+        while True:
+            try:
+                target_plan = int(input("Please choose a plan:"))
+            except ValueError:
+                continue
+            if target_plan in rc.retirementPlanList:
+                emp_plan = plans[target_plan]
+                break
+        while True:
+            try:
+                emp_time = float(input("How many hours did the employee work?"))
+                break
+            except ValueError:
+                continue
+
         while True:
             emp_add = input("Additional salary percentage contributed? y/n?")
             if emp_add.lower() == 'y':
-                emp_add = input("Enter the additional salary percentage:")
+                while True:
+                    try:
+                        emp_add = float(input("Enter the additional salary percentage:"))
+                        break
+                    except ValueError:
+                        continue
                 break
             elif emp_add.lower() == 'n':
                 emp_add = 0
                 break
-
         while True:
             datapoint = input("What data point would you like to view? \n\n"
                               "1. Total Company payout \n"
@@ -145,7 +160,7 @@ class Controller:
             if datapoint == "5":
                 exit(1)
             if datapoint == "1":
-                payout = (float(emp_salary) * (float(emp_plan[2]) + 1) * float(emp_time)) + float(emp_salary) * float(
+                payout = (float(emp_salary) * (float(emp_plan[2]) + 1) * emp_time) + float(emp_salary) * float(
                     emp_time)
                 print(f'Total Amount Paid to Employee by Company: ${payout}')
             elif datapoint == "2":
