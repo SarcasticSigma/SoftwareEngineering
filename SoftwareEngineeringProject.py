@@ -177,7 +177,7 @@ class Employee:
 class Controller:
     def __init__(self):
         rc = RetirementCalculator()
-        rc.employeeName = input("Please enter the employee name")
+        rc.employeeName = rc.getEmployeeName()
         emp_salary = rc.getHourlyRate()
         plans = rc.readPlans()
         for acc, i in enumerate(plans):
