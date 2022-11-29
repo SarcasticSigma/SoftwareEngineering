@@ -1,6 +1,6 @@
 # Main Controlling Class for the system.
 import os
-
+from sys import exit
 
 def _makeDefaultPlans(data_path, error):
     print(error)
