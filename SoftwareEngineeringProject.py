@@ -167,21 +167,26 @@ class Controller:
                               "5. Exit")
             if datapoint == "5":
                 exit(1)
+            emp_cont = (float(emp_salary) * (float(emp_plan[1]) + 1) * float(emp_time)) + float(emp_add) * float(
+                emp_salary)
+            payout = (float(emp_salary) * (float(emp_plan[2]) + 1) * emp_time) + float(emp_salary) * float(
+                emp_time)
+            company_cont = float(emp_salary) * (float(emp_plan[2]) + 1) * float(emp_time)
+            total_cont = emp_cont + emp_cont
             if datapoint == "1":
-                payout = (float(emp_salary) * (float(emp_plan[2]) + 1) * emp_time) + float(emp_salary) * float(
-                    emp_time)
+
                 print(f'Total Amount Paid to Employee by Company: ${payout}')
             elif datapoint == "2":
-                emp_cont = (float(emp_salary) * (float(emp_plan[1]) + 1) * float(emp_time)) + float(emp_add) * float(
-                    emp_salary)
+
                 print(f'Amount Contributed by Employee: ${emp_cont}')
             elif datapoint == "3":
-                company_cont = float(emp_salary) * (float(emp_plan[2]) + 1) * float(emp_time)
+
                 print(f'Amount Contributed by Company: ${company_cont}')
             elif datapoint == "4":
-                total_cont = (float(emp_salary) * (float(emp_plan[2]) + 1) * float(emp_time)) + (
-                        float(emp_salary) * (float(emp_plan[1]) + 1) * float(emp_time))
-                print(f'Total Amount Saved after {emp_time} hours: ${total_cont}')
+
+                # (float(emp_salary) * (float(emp_plan[2]) + 1) * float(emp_time)) + (
+                #                        float(emp_salary) * (float(emp_plan[1]) + 1) * float(emp_time))
+                print(f'Total Amount Saved by {rc.employeeName} after {emp_time} hours: ${total_cont}')
 
 
 def main():
