@@ -82,6 +82,9 @@ class RetirementCalculator:
         if hourlyRate <= 0:
             print("The provided hourly rate was invalid. The rate must be a positive number greater than zero.")
             self.getHourlyRate()
+        elif type(hourlyRate) != float:
+            print("Please enter a valid number as a response.")
+            self.getHourlyRate()
         return hourlyRate
 
     def display(self, param):
