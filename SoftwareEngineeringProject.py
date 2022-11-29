@@ -79,18 +79,15 @@ class RetirementCalculator:
     def getHourlyRate(self):
         hourlyRate = 0
         # This function gets the hourly rate input from the user
-        while True:
-            try:
-                hourlyRate = float(input("Enter the amount you earn per hour ($ is not necessary): "))
-                if hourlyRate <= 0:
-                    print("The provided hourly rate was invalid. The rate must be a positive number greater than zero.")
-                    continue
-                else:
-                    break
-            except ValueError:
-                print("Please enter a valid number as a response.")
-                continue
-        return hourlyRate
+        try:
+            hourlyRate = float(input("Enter the amount you earn per hour ($ is not necessary): "))
+            if hourlyRate <= 0:
+                print("Please provide an hourly rate greater than zero.")
+            else:
+                return hourlyRate 
+        except ValueError:
+            print("Please provide a valid number for hourly rate.")
+            self.getHourlyRate()
 
     def display(self, param):
         val = ''
