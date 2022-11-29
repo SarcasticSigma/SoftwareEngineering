@@ -186,11 +186,10 @@ class Controller:
         emp_plan = plans[int(input("Please choose a plan:"))]
         # Add ability to enter timespan / days / hours
         emp_time = input("How many hours did the employee work?")
-        emp_add = input("Were any additional dollars per hour added by the employee separate from the plan? y/n?")
+        emp_add = input("Additional salary percentage contributed? y/n?")
         while True:
-
             if emp_add.lower() == 'y':
-                emp_add = input("Enter the additional dollars per hour:")
+                emp_add = input("Enter the additional salary percentage:")
                 break
             elif emp_add.lower() == 'n':
                 emp_add = 0
@@ -210,7 +209,8 @@ class Controller:
                     emp_time)
                 print(f'Total Amount Paid to Employee by Company: ${payout}')
             elif datapoint == "2":
-                emp_cont = (float(emp_salary) * (float(emp_plan[1]) + 1) * float(emp_time)) + float(emp_add)
+                emp_cont = (float(emp_salary) * (float(emp_plan[1]) + 1) * float(emp_time)) + float(emp_add) * float(
+                    emp_salary)
                 print(f'Amount Contributed by Employee: ${emp_cont}')
             elif datapoint == "3":
                 company_cont = float(emp_salary) * (float(emp_plan[2]) + 1) * float(emp_time)
