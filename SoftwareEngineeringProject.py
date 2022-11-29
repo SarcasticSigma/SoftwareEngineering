@@ -6,9 +6,10 @@ import random
 
 
 def _makeDefaultPlans(data_path, error):
-    print(data_path)
+    print(error)
     if error == 'DIRECTORY':
         os.makedirs(data_path)
+        return
     with open(data_path, 'w') as file:
         # Plan Name
         # : Percentage of hourly salary that employee contributes
@@ -51,27 +52,16 @@ class RetirementCalculator:
         # Gets the plans from the retirement_plans text file which stores plans with attributes split by :
         # Example retirement plan would be planName:benefits
         plans = []
-        testing = ''
         # Replace forward slashes with backslashes in the data directory string.
-        data_dir = self.absoluteDataDirectory + '\\' + "".join([i.replace('/', '\\') for i in self.dataDirectory])
-        data_path = data_dir + "\\retirement_plans.txt"
+        data_dir = self.absoluteDataDirectory + "\\data\\"
+        data_path = data_dir + "retirement_plans.txt"
         if not os.path.exists(data_dir):
-            os.mkdir(data_dir)
-            print("The data file couldn't be found!"
-                  "\n\nPlease create a list of retirement plans and put it in the /data directory. ")
-            _makeDefaultPlans(data_path, "DIRECTORY")
-            exit(-1)
-        elif not os.path.exists(data_path):
-            print(f"The data file {data_path} couldn't be found!"
-                  "\n\nPlease create a list of retirement plans and put it in the /data directory. ")
+            _makeDefaultPlans(data_dir, "DIRECTORY")
+        if not os.path.exists(data_path):
             _makeDefaultPlans(data_path, "FILE")
-            exit(-1)
-        else:
-            with open(data_path) as file:
-                for i in file.readlines():
-                    plans.append(i.split(':'))
-        if not plans:
-            _makeDefaultPlans(data_path, "FILE")
+        with open(data_path) as file:
+            for i in file.readlines():
+                plans.append(i.split(':'))
         return plans
 
     def startMenu(self):
@@ -100,7 +90,7 @@ class RetirementCalculator:
                 self.startMenu()
         else:
             print("Your selection was invalid. Make sure you enter a valid number.")
-            RetirementCalculator.startMenu()
+            self.startMenu()
         return startSelection
 
     def getEmployeeName(self):
@@ -110,10 +100,10 @@ class RetirementCalculator:
         # If these tests pass, input is converted to string.
         if employeeName == "":
             print("An employee name was not given.")
-            RetirementCalculator.getEmployeeName()
-        elif len(employeeName) <= 30:
+            self.getEmployeeName()
+        elif len(employeeName) >= 30:
             print("The provided employee name was too long. Please shorten your input.")
-            RetirementCalculator.getEmployeeName()
+            self.getEmployeeName()
         else:
             str(employeeName)
         return employeeName
@@ -186,8 +176,8 @@ class Controller:
         emp_plan = plans[int(input("Please choose a plan:"))]
         # Add ability to enter timespan / days / hours
         emp_time = input("How many hours did the employee work?")
-        emp_add = input("Additional salary percentage contributed? y/n?")
         while True:
+            emp_add = input("Additional salary percentage contributed? y/n?")
             if emp_add.lower() == 'y':
                 emp_add = input("Enter the additional salary percentage:")
                 break
